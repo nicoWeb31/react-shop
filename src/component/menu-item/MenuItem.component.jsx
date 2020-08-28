@@ -3,22 +3,27 @@ import "./menu-item.styles.scss";
 
 
 
-const MenuItem = ({title,img,size}) => {
+const MenuItem = ({ title, img, size }) => {
     const styleImage = {
-        backgroundImage : `url(${img})`
+        backgroundImage: `url(${img})`
     }
 
 
 
 
     return (
-        <div className={`_menu-item ${size}`} style={styleImage}>
+
+        <div className={`_menu-item ${size}`} >
+            <div className="_bg-image" style={styleImage}>
+            </div>
+
                 <div className="_content">
-                    <h1 className="_title">{title}</h1>
+                    <h1 className="_title">{title.toUpperCase()}</h1>
                     <span className="_subtitle">SHOP NOW</span>
                 </div>
-            </div>
+        </div>
     );
+
 }
 
 export default MenuItem;
