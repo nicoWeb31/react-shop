@@ -2,7 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import Field from "../form/Field.componenet";
 import "./SignIn.style.scss";
-import ButtonCustom from "../form/ButtonCustom.component"
+import ButtonCustom from "../form/ButtonCustom.component";
+
+import {singinWhitgoogle} from "../../firebase/firebase.utils"
 
 
 const SignIn = (props) => {
@@ -57,7 +59,9 @@ const SignIn = (props) => {
                         type="Password"
                     />
 
-                <ButtonCustom>toto</ButtonCustom>
+                <ButtonCustom type="submit">Sign In</ButtonCustom>
+                <ButtonCustom onClick={singinWhitgoogle} >Sign In with Google</ButtonCustom>
+
 
             </form>
 
