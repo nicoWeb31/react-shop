@@ -4,7 +4,7 @@ import Field from "../form/Field.componenet";
 import "./SignIn.style.scss";
 import ButtonCustom from "../form/ButtonCustom.component";
 
-import {singinWhitgoogle} from "../../firebase/firebase.utils"
+import { singinWhitgoogle } from "../../firebase/firebase.utils"
 
 
 const SignIn = (props) => {
@@ -27,7 +27,7 @@ const SignIn = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        setCredentials({email:"",password:""})
+        setCredentials({ email: "", password: "" })
 
 
     }
@@ -35,32 +35,37 @@ const SignIn = (props) => {
 
     return (
         <div className="_sign-in">
-            <h2 className="">I already an account</h2>
+            <h2 className="_title">I already an account</h2>
             <span>Sin in with your email</span>
 
             <form onSubmit={handleSubmit}>
 
 
-                    <Field
-                        value={credentials.email}
-                        onChanges={handleChange}
-                        name="email"
-                        //error={error}
-                        label="Email"
-                        type="email"
-                    />
+                <Field
+                    value={credentials.email}
+                    onChanges={handleChange}
+                    name="email"
+                    //error={error}
+                    label="Email"
+                    type="email"
+                />
 
-                    <Field
-                        value={credentials.password}
-                        onChanges={handleChange}
-                        name="password"
-                        //error={error}
-                        label="Password"
-                        type="Password"
-                    />
+                <Field
+                    value={credentials.password}
+                    onChanges={handleChange}
+                    name="password"
+                    //error={error}
+                    label="Password"
+                    type="Password"
+                />
 
-                <ButtonCustom type="submit">Sign In</ButtonCustom>
-                <ButtonCustom onClick={singinWhitgoogle} >Sign In with Google</ButtonCustom>
+                <div className="_buttons">
+
+                    <ButtonCustom type="submit">Sign In</ButtonCustom>
+                    <ButtonCustom onClick={singinWhitgoogle} isGoogle >Sign In with Google</ButtonCustom>
+
+                </div>
+
 
 
             </form>
