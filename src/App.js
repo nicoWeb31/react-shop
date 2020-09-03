@@ -6,42 +6,54 @@ import ShopPage from "./pages/shop/ShopPage.component";
 import Header from "./component/header/Header.component";
 import SinInSinUpPage from "./pages/signIn-and-singUp/SinInSinUpPage.component";
 import { auth} from './firebase/firebase.utils'
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 
-function App() {
+class App extends React.Component{
 
-  const[currentUser, setCurentUser] = useState(null)
+  constructor(){
+    super();
 
-   //au chargement du composant
-  useEffect(() => {
-    auth.onAuthStateChanged(user=>{
-      setCurentUser({user})
-    })      
-    return () =>{
-      setCurentUser(null);
-    };
-  },[]);
+    this.state = {
+      curentUser : null
+    }
+  }
+
+  unsusbscribeFromAuth = null;
 
 
-  return (
-    <div>
+  componentDidMount() {
+    this.unsusbscribeFromAuth = auth.onAuthStateChanged(user =>{
+      this.setState({curentUser: user})
+      console.log(user);
+    })
+  }
 
-      <Header currentUser={currentUser} onLogout={setCurentUser}/>
-
-      <Switch>
-
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/shop" component={ShopPage} />
-        <Route exact path="/signin" component={SinInSinUpPage} />
-
-
-
-
-      </Switch>
-    </div>
-  );
+componentWillUnmount(){
+this.unsusbscribeFromAuth = null
 }
+
+  render (){
+
+    return (
+      <div>
+  
+        <Header curentUser={this.state.curentUser}/>
+  
+        <Switch>
+  
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/signin" component={SinInSinUpPage} />
+  
+  
+  
+  
+        </Switch>
+      </div>
+    );
+  }
+
+
+  }
 
 export default App;

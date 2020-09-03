@@ -5,11 +5,10 @@ import { ReactComponent as Logo} from "../../asset/logo/crown.svg";
 import {auth} from "../../firebase/firebase.utils"
 
 
-const Header = ({currentUser,onLogout}) => {
-    console.log(currentUser);
+const Header = ({ curentUser }) => {
+    console.log(curentUser);
 
     const signOut = () =>{
-        onLogout(null);
         auth.signOut();
     } 
 
@@ -24,7 +23,7 @@ const Header = ({currentUser,onLogout}) => {
 
 
                 {
-                    currentUser ?
+                    curentUser ?
                     (
                         <div className="_option" onClick={signOut}>SIGN OUT</div>
                     ) : 
