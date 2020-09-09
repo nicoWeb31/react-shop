@@ -6,7 +6,7 @@ import {auth} from "../../firebase/firebase.utils";
 import {connect} from 'react-redux'
 
 
-const Header = ({ curentUser }) => {
+const Header = (props) => {
 
     const signOut = () =>{
         auth.signOut();
@@ -23,7 +23,7 @@ const Header = ({ curentUser }) => {
 
 
                 {
-                    curentUser ?
+                    props.currentUser ?
                     (
                         <div className="_option" onClick={signOut}>SIGN OUT</div>
                     ) : 
@@ -39,7 +39,7 @@ const Header = ({ curentUser }) => {
 }
 
 const mapStateToProps = state =>({
-    curentUser: state.user.curentUser
+    currentUser: state.user.currentUser
 }) 
 
 export default connect(mapStateToProps)(Header);

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import HomePage from "./pages/homepage/homepage.component";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch,Redirect } from 'react-router-dom';
 import ShopPage from "./pages/shop/ShopPage.component";
 import Header from "./component/header/Header.component";
 import SinInSinUpPage from "./pages/signIn-and-singUp/SinInSinUpPage.component";
@@ -14,6 +14,7 @@ class App extends React.Component {
 
 
   unsusbscribeFromAuth = null;
+  
   
   
   componentDidMount() {
@@ -59,7 +60,9 @@ class App extends React.Component {
 
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signin" component={SinInSinUpPage} />
+          <Route exact path="/signin" render={()=>
+            this.props.currentUser ? (<Redirect to='/' />) : (<SinInSinUpPage />)
+          } />
 
 
         </Switch>
@@ -70,8 +73,12 @@ class App extends React.Component {
 
 }
 
+const mapStateToProps = ({user}) =>({
+  currentUser: user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
