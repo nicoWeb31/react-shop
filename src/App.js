@@ -58,7 +58,7 @@ this.unsusbscribeFromAuth = null
     return (
       <div>
   
-        <Header curentUser={this.state.curentUser}/>
+        <Header />
   
         <Switch>
   
