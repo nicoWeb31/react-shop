@@ -5,7 +5,7 @@ import "./SignIn.style.scss";
 import ButtonCustom from "../form/ButtonCustom.component";
 
 
-import { singinWhitgoogle } from "../../firebase/firebase.utils"
+import { singinWhitgoogle, auth } from "../../firebase/firebase.utils"
 
 
 const SignIn = (props) => {
@@ -26,8 +26,16 @@ const SignIn = (props) => {
 
     //soumission du formulaire
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
+
+        try {
+            await auth.signInWithEmailAndPassword(credentials.email,credentials.password);
+
+        }catch(error){
+            console.log(error)
+        }
+
         setCredentials({ email: "", password: "" })
 
 
