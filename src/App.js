@@ -5,67 +5,62 @@ import { Route, Switch } from 'react-router-dom';
 import ShopPage from "./pages/shop/ShopPage.component";
 import Header from "./component/header/Header.component";
 import SinInSinUpPage from "./pages/signIn-and-singUp/SinInSinUpPage.component";
-import { auth,createUserProfileDoc} from './firebase/firebase.utils'
+import { auth, createUserProfileDoc } from './firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.action'
 
 
-class App extends React.Component{
+class App extends React.Component {
 
-  constructor(){
-    super();
-
-    this.state = {
-      curentUser : null
-    }
-  }
 
   unsusbscribeFromAuth = null;
-
-
+  
+  
   componentDidMount() {
-    this.unsusbscribeFromAuth = auth.onAuthStateChanged(async userAuht =>{
-      
-      
-      if(userAuht){
+    const { setCurrentUser } = this.props;
+    this.unsusbscribeFromAuth = auth.onAuthStateChanged(async userAuht => {
+
+
+      if (userAuht) {
         const userRef = await createUserProfileDoc(userAuht);
 
-        userRef.onSnapshot(snapShot =>{
-          console.log(snapShot)
-          
-          this.setState({curentUser: {
+        userRef.onSnapshot(snapShot => {
+
+
+          setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
-          }})
+          })
         })
 
-      }else{
-        this.setState({
-          curentUser: userAuht
-        })
       }
-
       
+      setCurrentUser(
+        userAuht
+      )
+
+
     })
 
-    console.log(this.state.curentUser)
   }
 
-componentWillUnmount(){
-this.unsusbscribeFromAuth = null
-}
+  componentWillUnmount() {
+    this.unsusbscribeFromAuth = null
+  }
 
-  render (){
+  render() {
 
     return (
       <div>
-  
+
         <Header />
-  
+
         <Switch>
-  
+
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path="/signin" component={SinInSinUpPage} />
-  
+
 
         </Switch>
       </div>
@@ -73,6 +68,10 @@ this.unsusbscribeFromAuth = null
   }
 
 
-  }
+}
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(App);

@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 
 
 const Header = ({ curentUser }) => {
-    console.log(curentUser);
 
     const signOut = () =>{
         auth.signOut();
