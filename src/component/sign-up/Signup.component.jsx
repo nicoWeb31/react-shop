@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonCustom from '../form/ButtonCustom.component';
 import Field from '../form/Field.componenet';
 import "./Signup.style.scss";
-import { auth, createUserProfileDoc } from "../../firebase"
+import { auth, createUserProfileDoc } from "../../firebase/firebase.utils"
 import { useState } from 'react';
 
 
@@ -92,10 +92,7 @@ const Signup = () => {
                     required
                 />
 
-        <ButtonCustom
-            type="submit"
-
-        >
+        <ButtonCustom type="submit">
             Sign Up
         </ButtonCustom>
         
