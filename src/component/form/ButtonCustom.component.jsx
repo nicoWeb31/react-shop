@@ -3,9 +3,11 @@ import React from 'react';
 import "./button.style.scss";
 
 
-const ButtonCustom = ({children,isGoogle, ...othersProps}) => {
+const ButtonCustom = ({children,isGoogle,inverted, ...othersProps}) => {
     return (
-        <button className={(isGoogle ? "_google-sign-in " : "") + "_custom-button"} {...othersProps}>
+        <button className={(isGoogle ? "_google-sign-in " : "") + 
+                            (inverted ? " _inverted " : "") + 
+                            "_custom-button"} {...othersProps}>
             {children}
         </button>
     );
