@@ -3,7 +3,9 @@ import "./header.style.scss";
 import {Link} from "react-router-dom";
 import { ReactComponent as Logo} from "../../asset/logo/crown.svg";
 import {auth} from "../../firebase/firebase.utils";
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import CardIcon from '../card-icon/CardIcon.component';
+import CartDropdown from '../cart/cart-dropdown/CartDropdown.component'
 
 
 const Header = (props) => {
@@ -32,14 +34,22 @@ const Header = (props) => {
                     )
                 }
 
-
+                <CardIcon />
             </div>
+            
+            {
+                props.toggleDropdown ? (<CartDropdown/>) : ''
+            }
+            
+            
+
         </div>
     );
 }
 
-const mapStateToProps = state =>({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({user,cart}) =>({
+    currentUser: user.currentUser,
+    toggleDropdown: cart.hidden
 }) 
 
 export default connect(mapStateToProps)(Header);
