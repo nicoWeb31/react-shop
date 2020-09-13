@@ -4,12 +4,24 @@ import CollectionItems from '../../../component/collection-item/CollectionItems.
 import {selectCollection} from "../../../redux/shop/shop.selector";
 import {connect} from 'react-redux';
 
-const Collection = ({ collection }) => (
-    <div className='_collection-page'>
+const Collection = ({ collection }) =>{
 
-        <CollectionItems />
-    </div>
-);
+    const {title,items} = collection;
+    return (
+        <div className='_collection-page'>
+    
+            <h2 className="_title">{title}</h2>
+            <div className="_items">
+                {
+                    items.map(item =>
+                        <CollectionItems key={item.id} item={item}/>
+                    )
+                }
+            </div>
+        </div>
+    );
+
+} 
 
 const mapStateToProps = (state,ownProps) =>({
     collection : selectCollection(ownProps.match.params.collectionId)(state)

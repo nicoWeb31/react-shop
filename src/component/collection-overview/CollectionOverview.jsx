@@ -6,18 +6,23 @@ import PreviewCollection from "../../component/preview-collection/PreviewCollect
 import { ShopSelect } from '../../redux/shop/shop.selector';
 
 
+const CollectionOverview = ({shop}) => {
+
+    console.log('CollectionOverview')
+    
+    return (
+        <div className='_collection-overview'>
+                {
+                    shop.map(({id,...otherProps}) => (
+                        <PreviewCollection key={id} {...otherProps} />
+                    ))
+                    
+                }
+        </div>
+    );
 
 
-const CollectionOverview = ({shop}) => (
-    <div className='_collection-overview'>
-            {
-                shop.map(({id,...otherProps}) => (
-                    <PreviewCollection key={id} {...otherProps} />
-                ))
-                
-            }
-    </div>
-);
+}
 
 
 const mapStateToProps = createStructuredSelector({
